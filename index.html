@@ -18,6 +18,7 @@
   a.secundario { background: transparent; border: 2px solid var(--borda); color: var(--txt); font-size: 16px; }
   code { background: #111317; padding: 2px 6px; border-radius: 4px; color: #fff; }
   small { color: var(--sub); }
+  #adicionar { color: var(--sub); }
 </style>
 </head>
 <body>
@@ -26,10 +27,12 @@
   <p id="status">Abrindo o Minecraft…</p>
   <a class="botao" id="entrar" href="#">Entrar no servidor</a>
   <p><small>Abre o Minecraft e já entra no servidor.</small></p>
-  <a class="botao secundario" id="adicionar" href="#">Só salvar o servidor na lista</a>
-  <a class="botao secundario" href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe">Não tenho o Minecraft (Play Store)</a>
-  <a class="botao secundario" href="https://apps.apple.com/app/id479516143">iPhone (App Store)</a>
+  <a class="botao secundario loja" id="android" href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe">Não tenho o Minecraft (Play Store)</a>
+  <a class="botao secundario loja" id="iphone" href="https://apps.apple.com/app/id479516143">Não tenho o Minecraft (App Store)</a>
+  <p><small>Depois de instalar, volte aqui e toque em <b>Entrar no servidor</b>.</small></p>
   <p><small>Não abriu? Adicione na mão: endereço <code>minewj.duckdns.org</code> porta <code>19132</code></small></p>
+  <!-- Plano B discreto no fim (pedido do Weslen: botão grande aqui o leigo tocava antes do verde) -->
+  <p><small><a id="adicionar" href="#">Só salvar o servidor na lista</a></small></p>
 </main>
 <script>
   // Links do próprio Minecraft Bedrock (não oficiais, mas usados por aí): "connect" abre o jogo e já entra no
@@ -38,6 +41,10 @@
   var adicionar = "minecraft://?addExternalServer=" + encodeURIComponent("Servidor do WJ") + "|minewj.duckdns.org:19132";
   document.getElementById("entrar").href = entrar;
   document.getElementById("adicionar").href = adicionar;
+  // Mostra só a loja do aparelho (sem saber qual é, mostra as duas)
+  var ua = navigator.userAgent;
+  if (/Android/i.test(ua)) document.getElementById("iphone").style.display = "none";
+  else if (/iPhone|iPad|iPod/i.test(ua)) document.getElementById("android").style.display = "none";
   setTimeout(function () { location.href = entrar; }, 400);
   setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toque no botão verde:"; }, 2500);
 </script>
