@@ -24,18 +24,22 @@
 <main>
   <h1>⛏️ Servidor do WJ</h1>
   <p id="status">Abrindo o Minecraft…</p>
-  <a class="botao" id="abrir" href="#">Abrir o Minecraft e adicionar o servidor</a>
-  <p><small>O servidor aparece na aba <b>Servidores</b>. É só tocar nele e entrar.</small></p>
+  <a class="botao" id="entrar" href="#">Entrar no servidor</a>
+  <p><small>Abre o Minecraft e já entra no servidor.</small></p>
+  <a class="botao secundario" id="adicionar" href="#">Só salvar o servidor na lista</a>
   <a class="botao secundario" href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe">Não tenho o Minecraft (Play Store)</a>
   <a class="botao secundario" href="https://apps.apple.com/app/id479516143">iPhone (App Store)</a>
-  <p><small>Não abriu? Adiciona na mão: endereço <code>minewj.duckdns.org</code> porta <code>19132</code></small></p>
+  <p><small>Não abriu? Adicione na mão: endereço <code>minewj.duckdns.org</code> porta <code>19132</code></small></p>
 </main>
 <script>
-  // Link do próprio Minecraft Bedrock: abre o jogo já com o servidor adicionado na lista
-  var link = "minecraft://?addExternalServer=" + encodeURIComponent("Servidor do WJ") + "|minewj.duckdns.org:19132";
-  document.getElementById("abrir").href = link;
-  setTimeout(function () { location.href = link; }, 400);
-  setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toca no botão verde:"; }, 2500);
+  // Links do próprio Minecraft Bedrock (não oficiais, mas usados por aí): "connect" abre o jogo e já entra no
+  // servidor; "addExternalServer" só salva o servidor na aba Servidores (plano B)
+  var entrar = "minecraft://connect/?serverUrl=minewj.duckdns.org&serverPort=19132";
+  var adicionar = "minecraft://?addExternalServer=" + encodeURIComponent("Servidor do WJ") + "|minewj.duckdns.org:19132";
+  document.getElementById("entrar").href = entrar;
+  document.getElementById("adicionar").href = adicionar;
+  setTimeout(function () { location.href = entrar; }, 400);
+  setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toque no botão verde:"; }, 2500);
 </script>
 </body>
 </html>
