@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servidor do WJ</title>
+<meta name="description" content="Entra no servidor de Minecraft do WJ pelo celular">
+<style>
+  :root { --bg: #1b1d22; --card: #2a2d34; --txt: #f1f1f1; --sub: #a9adb7; --verde: #4caf50; --borda: #3b3f48; }
+  * { box-sizing: border-box; }
+  body { margin: 0; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;
+         background: var(--bg); color: var(--txt); font: 16px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { width: 100%; max-width: 420px; background: var(--card); border: 2px solid var(--borda); border-radius: 12px; padding: 24px; text-align: center; }
+  h1 { margin: 0 0 4px; font-size: 22px; }
+  p { margin: 8px 0; color: var(--sub); }
+  a.botao { display: block; margin: 14px 0; padding: 14px; border-radius: 8px; background: var(--verde); color: #fff;
+            font-weight: 700; text-decoration: none; font-size: 18px; }
+  a.secundario { background: transparent; border: 2px solid var(--borda); color: var(--txt); font-size: 16px; }
+  code { background: #111317; padding: 2px 6px; border-radius: 4px; color: #fff; }
+  small { color: var(--sub); }
+</style>
+</head>
+<body>
+<main>
+  <h1>⛏️ Servidor do WJ</h1>
+  <p id="status">Abrindo o Minecraft…</p>
+  <a class="botao" id="abrir" href="#">Abrir o Minecraft e adicionar o servidor</a>
+  <p><small>O servidor aparece na aba <b>Servidores</b>. É só tocar nele e entrar.</small></p>
+  <a class="botao secundario" href="https://play.google.com/store/apps/details?id=com.mojang.minecraftpe">Não tenho o Minecraft (Play Store)</a>
+  <a class="botao secundario" href="https://apps.apple.com/app/id479516143">iPhone (App Store)</a>
+  <p><small>Não abriu? Adiciona na mão: endereço <code>minewj.duckdns.org</code> porta <code>19132</code></small></p>
+</main>
+<script>
+  // Link do próprio Minecraft Bedrock: abre o jogo já com o servidor adicionado na lista
+  var link = "minecraft://?addExternalServer=" + encodeURIComponent("Servidor do WJ") + "|minewj.duckdns.org:19132";
+  document.getElementById("abrir").href = link;
+  setTimeout(function () { location.href = link; }, 400);
+  setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toca no botão verde:"; }, 2500);
+</script>
+</body>
+</html>
