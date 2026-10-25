@@ -65,11 +65,23 @@
   // servidor (testado pelo Weslen); "addExternalServer" só salva o servidor na aba Servidores (plano B)
   var entrar = "minecraft://connect/?serverUrl=minewj.duckdns.org&serverPort=19132";
   var adicionar = "minecraft://?addExternalServer=" + encodeURIComponent("Servidor do WJ") + "|minewj.duckdns.org:19132";
+  // Android: sem abrir sozinho. O navegador de dentro do Discord de alguns celulares fechava a página na hora do
+  // redirecionamento automático e o Minecraft não abria (vídeo de um amigo, 2026-10-25); com o toque da pessoa abre.
+  // intent:// com o pacote do Minecraft: se não estiver instalado, o Android leva pra Play Store.
+  var android = /Android/i.test(navigator.userAgent);
+  if (android) {
+    var loja = "https://play.google.com/store/apps/details?id=com.mojang.minecraftpe";
+    var intent = function (u) { return "intent:" + u.slice("minecraft:".length) + "#Intent;scheme=minecraft;package=com.mojang.minecraftpe;S.browser_fallback_url=" + encodeURIComponent(loja) + ";end"; };
+    entrar = intent(entrar); adicionar = intent(adicionar);
+  }
   document.getElementById("entrar").href = entrar;
   document.getElementById("entrar2").href = entrar;
   document.getElementById("adicionar").href = adicionar;
-  setTimeout(function () { location.href = entrar; }, 400);
-  setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toque no botão verde:"; }, 2500);
+  if (android) document.getElementById("status").textContent = "Toque no botão verde para entrar:";
+  else {
+    setTimeout(function () { location.href = entrar; }, 400);
+    setTimeout(function () { document.getElementById("status").textContent = "Se o Minecraft não abriu sozinho, toque no botão verde:"; }, 2500);
+  }
 </script>
 </body>
 </html>
